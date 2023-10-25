@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Sep  8 10:42:48 2023
+
+@author: zxcccc
+"""
+
+"""https://www.maxlist.xyz/2018/09/25/python_googlesheet_crud/"""
+
+import pygsheets
+import pandas as pd
+
+
+gc = pygsheets.authorize(service_file='D:/zxcccc/Desktop/Code/googleAPI.json')
+
+sht = gc.open_by_url(
+'https://docs.google.com/spreadsheets/d/1yekN9iuf_EQVNs5noYVELAgSmx4nZZFqlJ-1laIrUWY/edit#gid=1556461210'
+)
+
+wks_list = sht.worksheets()
+print(wks_list)
+
+wks = sht.worksheet_by_title("202306問題清單")
+
+#讀取成DataFrame
+df = pd.DataFrame(wks.get_all_records())
